@@ -26,6 +26,22 @@ class Welcome extends Component {
     username: '',
   };
 
+  async componentDidMount() {
+    const { navigation } = this.props;
+
+    this.setState({ loading: true });
+
+    const user = await AsyncStorage.getItem('@Githuber:username');
+
+    if (!user) {
+      this.setState({ loading: false });
+    }
+
+    if (user) {
+      setTimeout(() => navigation.navigate('Repositories'), 2000);
+    }
+  }
+
   componentWillUnmount() {
     this.setState({ loading: false });
   }
