@@ -24,27 +24,10 @@ class Welcome extends Component {
   state = {
     loading: false,
     username: '',
+    error: false,
   };
 
-  async componentDidMount() {
-    const { navigation } = this.props;
-
-    this.setState({ loading: true });
-
-    const user = await AsyncStorage.getItem('@Githuber:username');
-
-    if (!user) {
-      this.setState({ loading: false });
-    }
-
-    if (user) {
-      setTimeout(() => navigation.navigate('Repositories'), 2000);
-    }
-  }
-
-  componentWillUnmount() {
-    this.setState({ loading: false });
-  }
+  componentDidMount() {}
 
   checkUserExists = async (username) => {
     const user = await api.get(`/users/${username}`);
@@ -60,7 +43,7 @@ class Welcome extends Component {
     const { username } = this.state;
     const { navigation } = this.props;
 
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: false });
 
     try {
       await this.checkUserExists(username);
@@ -69,12 +52,12 @@ class Welcome extends Component {
 
       navigation.navigate('Repositories');
     } catch (err) {
-      console.log('User not Found!');
+      this.setState({ error: true, loading: false });
     }
   };
 
   render() {
-    const { username, loading } = this.state;
+    const { username, loading, error } = this.state;
 
     return (
       <View style={styles.container}>
@@ -105,6 +88,7 @@ class Welcome extends Component {
             )}
           </TouchableOpacity>
         </View>
+        {error && <Text style={styles.error}>Usuário inexistente.</Text>}
       </View>
     );
   }

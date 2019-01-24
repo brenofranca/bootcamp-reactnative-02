@@ -1,10 +1,30 @@
 import './config/ReactotronConfig';
 import './config/DevToolsConfig';
 
-import React from 'react';
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 
-import Routes from './routes';
+import createNavigator from './routes';
 
-const App = () => <Routes />;
+export default class App extends Component {
+  state = {
+    userLogged: false,
+    userChecked: false,
+  };
 
-export default App;
+  async componentDidMount() {
+    const username = await AsyncStorage.getItem('@Githuber:username');
+
+    this.setState({ userChecked: true, userLogged: !!username });
+  }
+
+  render() {
+    const { userChecked, userLogged } = this.state;
+
+    if (!userChecked) return null;
+
+    const Routes = createNavigator(userLogged);
+
+    return <Routes />;
+  }
+}

@@ -26,6 +26,14 @@ const styles = StyleSheet.create({
     padding: metrics.basePadding * 2,
   },
 
+  error: {
+    color: colors.danger,
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginTop: metrics.baseMargin * 2,
+    textAlign: 'center',
+  },
+
   form: {
     marginTop: metrics.baseMargin * 2,
   },
