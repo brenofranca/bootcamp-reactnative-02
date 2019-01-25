@@ -4,7 +4,7 @@ import './config/DevToolsConfig';
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 
-import createNavigator from './routes';
+import { createNavigator } from './routes';
 
 export default class App extends Component {
   state = {

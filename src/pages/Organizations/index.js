@@ -1,9 +1,25 @@
 import React from 'react';
-
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
-// import styles from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const Organizations = () => <View />;
+import Header from '~/components/Header';
+
+const Organizations = () => (
+  <View>
+    <Header title="Repositórios" />
+  </View>
+);
+
+const TabIcon = ({ tintColor }) => <Icon name="building" size={20} color={tintColor} />;
+
+TabIcon.propTypes = {
+  tintColor: PropTypes.string.isRequired,
+};
+
+Organizations.navigationOptions = {
+  tabBarIcon: TabIcon,
+};
 
 export default Organizations;

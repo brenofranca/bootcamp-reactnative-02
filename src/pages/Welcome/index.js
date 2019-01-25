@@ -27,8 +27,6 @@ class Welcome extends Component {
     error: false,
   };
 
-  componentDidMount() {}
-
   checkUserExists = async (username) => {
     const user = await api.get(`/users/${username}`);
 
@@ -50,7 +48,7 @@ class Welcome extends Component {
 
       await this.saveUser(username);
 
-      navigation.navigate('Repositories');
+      navigation.navigate('User');
     } catch (err) {
       this.setState({ error: true, loading: false });
     }
