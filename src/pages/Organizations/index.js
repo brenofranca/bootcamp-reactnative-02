@@ -8,7 +8,7 @@ import Header from '~/components/Header';
 
 const Organizations = () => (
   <View>
-    <Header title="Repositórios" />
+    <Header title="Organizações" />
   </View>
 );
 
